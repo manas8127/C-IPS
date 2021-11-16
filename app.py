@@ -1,0 +1,57 @@
+import streamlit as st
+import pandas as pd
+import joblib
+import time
+
+st.markdown("<h1 style='text-align: center; color: white;'>C-IPS</h1>", unsafe_allow_html=True)
+#st.write()
+
+
+mj=joblib.load('model_joblib_real_random_forest_fourteen')
+df = pd.read_csv('x_test_fourteen.csv')
+k=0
+    
+for i in range(1, 102):
+    d=df.iloc[i-1:i]
+    st.write("\n")
+    st.write("\n")
+    st.write(d)
+    port = d['Destination Port']
+    val = mj.predict(d)
+    if val == 0:
+            #st.success("Benign network, NORMAL TRAFFIC detected!")
+        if(k>0):
+            time.sleep(2)
+        k=k+1
+        continue
+    elif val == 1:
+        st.error("DDoS attack detected! Decoy Server Activated for IP address 205.174.165.73".format(port.to_string(index=False)))
+    elif val == 2: 
+        st.error("PortScan attack detected! Decoy Server Activated for IP address 205.174.165.73".format(port.to_string(index=False)))
+    elif val == 3:
+        st.error("Bot attack detected! Decoy Server Activated for IP address 205.174.165.73".format(port.to_string(index=False)))
+    elif val == 4: 
+        st.error("Infiltration attack detected! Decoy Server Activated for IP address 205.174.165.73".format(port.to_string(index=False)))
+    elif val == 5: 
+        st.error("Web attack (Brute Force) detected! IP address 205.174.165.73 blocked for next 15 seconds ".format(port.to_string(index=False)))
+    elif val == 6:
+        st.error("Web attack (XSS) detected! IP address 205.174.165.73 blocked for next 15 seconds ".format(port.to_string(index=False)))
+    elif val == 7:
+        st.error("Web attack (SQL Injection) detected! IP address 205.174.165.73 blocked for next 15 seconds ".format(port.to_string(index=False)))
+    else:
+        st.error("FTP-Patator attack detected! IP address 205.174.165.69 blocked for next 15 seconds ".format(port.to_string(index=False)))
+
+    
+
+        
+
+
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
