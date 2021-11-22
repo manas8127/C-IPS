@@ -54,6 +54,9 @@ import pandas as pd
 from datetime import *
 from time import *
 from streamlit.script_runner import StopException, RerunException
+import subprocess
+
+st.set_page_config(page_title='C-IPS Login')
 
 
 
@@ -113,6 +116,7 @@ def main():
 			if result:
 
 				st.success("Logged In successfully as {}".format(username))
+				subprocess.Popen(["streamlit", "run", "app.py"])
 
 				# task = st.selectbox("Task",["Add Post","Analytics","Profiles"])
 				# if task == "Add Post":
@@ -135,7 +139,8 @@ def main():
 	elif choice == "SignUp":
 		new_user = st.text_input("Username")
 		new_password = st.text_input("Password",type='password')
-
+		st.info("Make changes to server whose ownership does not belong to you constitutes to un-ethical hacking and can lead to improsonment under IT Act.")
+		st.checkbox("I accept the terms and conditions")
 		if st.button("Signup"):
 			create_usertable()
 			add_userdata(new_user,make_hashes(new_password))
