@@ -1,4 +1,6 @@
+from time import time
 import streamlit as st
+import pyautogui
 
 st.set_page_config(page_title='C-IPS Testing Panel')
 
@@ -16,8 +18,8 @@ st.markdown("<h1 style='text-align: center; color: white;'>C-IPS Testing Panel</
 
 def check(ip):
     iptype=ip.index('-')
-    ip[iptype+2:]
-
+    c=ip[iptype+2:]
+    return c
 
 values=['205.174.165.73 - Decoy','205.174.165.69 - Decoy','205.174.165.70 - Decoy','205.174.165.71 - Decoy', 
 '85.237.172.55 - Normal Traffic',
@@ -36,7 +38,6 @@ values=['205.174.165.73 - Decoy','205.174.165.69 - Decoy','205.174.165.70 - Deco
 # st.write(c)
 
 
-
 options = list(range(len(values)))
 
 value = st.selectbox("Select IP", options, format_func=lambda x: values[x])
@@ -51,6 +52,16 @@ with col3 :
     pass
 with col4:
     button= st.button('Check Response')
+
+
+
+if button:
+    ch=check(values[value])
+    if(ch == 'Decoy'):
+        st.warning('Suspicious activity detected from this IP')
+        pyautogui.hotkey('f5')
+        
+    
 
     
 
