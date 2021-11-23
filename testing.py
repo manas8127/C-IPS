@@ -1,6 +1,7 @@
-from time import time
+import time
 import streamlit as st
 import pyautogui
+
 
 st.set_page_config(page_title='C-IPS Testing Panel')
 
@@ -59,7 +60,13 @@ if button:
     ch=check(values[value])
     if(ch == 'Decoy'):
         st.warning('Suspicious activity detected from this IP')
+        time.sleep(10)
         pyautogui.hotkey('f5')
+    elif(ch == 'Normal Traffic'):
+        st.success('Normal traffic from this IP')
+
+        
+        
         
     
 
