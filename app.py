@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 import time
+import subprocess
+import os
 
 from streamlit.elements.arrow import Data
 
@@ -22,7 +24,6 @@ st.markdown("<h1 style='text-align: center; color: white;'>C-IPS</h1>", unsafe_a
 
 # st.write("\n")
 
-data=""
 
 col1, col2, col3 , col4, col5, col6, col7, col8 = st.columns(8)
 
@@ -39,12 +40,16 @@ with col5:
 with col6:
     pass
 with col7:
-    st.button("Terminal")
+    button_start= st.button('Terminal')
 with col8:
-    st.download_button("Report",data)
+    st.button("Report")
     
 
+if button_start:
+    subprocess.call('start', shell = True) 
 
+
+    
 
 
 mj=joblib.load('model_joblib_real_random_forest_fourteen')

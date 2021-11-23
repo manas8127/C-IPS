@@ -55,6 +55,7 @@ from datetime import *
 from time import *
 from streamlit.script_runner import StopException, RerunException
 import subprocess
+import pyautogui
 
 st.set_page_config(page_title='C-IPS Login')
 
@@ -146,6 +147,10 @@ def main():
 			add_userdata(new_user,make_hashes(new_password))
 			st.success("You have successfully created an account, now refresh the page to LogIn")
 			#st.info("Go to Login Menu to login")
+			pyautogui.hotkey('f5')
+			
+
+
 
 	hide_st_style = """
             <style>
