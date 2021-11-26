@@ -56,8 +56,10 @@ import time
 from streamlit.script_runner import StopException, RerunException
 import subprocess
 import pyautogui
+from PIL import Image
+img=Image.open('cips2.png')
 
-st.set_page_config(page_title='C-IPS Login')
+st.set_page_config(page_title='C-IPS Login', page_icon=img)
 
 
 

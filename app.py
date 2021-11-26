@@ -4,10 +4,13 @@ import joblib
 import time
 import subprocess
 import os
+from PIL import Image
+img=Image.open('cips2.png')
 
 from streamlit.elements.arrow import Data
 
-st.set_page_config(page_title='C-IPS')
+#favicon="C:\Users\ASUS\Documents\Juspay-CIPS\cips2.png"
+st.set_page_config(page_title='C-IPS', page_icon=img)
 
 
 hide_st_style = """

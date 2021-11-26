@@ -1,9 +1,13 @@
 import time
 import streamlit as st
 import pyautogui
+from conf import *
+import mysql.connector
 
+from PIL import Image
+img=Image.open('cips2.png')
 
-st.set_page_config(page_title='C-IPS Testing Panel')
+st.set_page_config(page_title='C-IPS Testing Panel',page_icon=img)
 
 hide_st_style = """
             <style>
@@ -22,7 +26,7 @@ def check(ip):
     c=ip[iptype+2:]
     return c
 
-values=['205.174.165.73 - Decoy','205.174.165.69 - Decoy','205.174.165.70 - Decoy','205.174.165.71 - Decoy', 
+values=['205.174.165.73 - Attack','205.174.165.69 - Attack','205.174.165.70 - Attack','205.174.165.71 - Attack', 
 '85.237.172.55 - Normal Traffic',
 '157.79.212.141 - Normal Traffic',
 '197.23.92.143 - Normal Traffic',
@@ -56,15 +60,58 @@ with col4:
 
 
 
+
+
+
+conn = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="8127199067@1",
+  database="cips"
+)
+
+
+cursor = conn.cursor()
+cursor.execute("use cips;")
+
+
+
 if button:
     ch=check(values[value])
-    if(ch == 'Decoy'):
+    if(ch == 'Attack'):
         st.warning('Suspicious activity detected from this IP')
-        time.sleep(10)
-        pyautogui.hotkey('f5')
+        sql_select_Query = "select * from decoydata"
+
+        cursor.execute(sql_select_Query)
+        # get all records
+        records = cursor.fetchall()
+        #st.write("Total number of rows in table: ", cursor.rowcount)
+        st.markdown("<h2 style='text-align: center; color: white;'>Transaction Data</h2>", unsafe_allow_html=True)
+
+        for row in records:
+            st.error("Customer Name: "+ str(row[0])+"  \n Bank Account Number: "+ str(row[1])+"  \n Transaction ID: "+ str(row[2])+"  \n Transaction Amount: "+ str(row[3])+"  \n PAN: "+ str(row[4]))
+            # st.warning("Bank Account Number: "+ str(row[1]))
+            # st.warning("Transaction ID: "+ str(row[2]))
+            # st.warning("Transaction Amount: "+ str(row[3]))
+            # st.warning("PAN: "+ str(row[4]))
+
+        # time.sleep(10)
+        # pyautogui.hotkey('f5')
     elif(ch == 'Normal Traffic'):
         st.success('Normal traffic from this IP')
+        sql_select_Query = "select * from realdata"
 
+        cursor.execute(sql_select_Query)
+        # get all records
+        records = cursor.fetchall()
+        #st.write("Total number of rows in table: ", cursor.rowcount)
+        st.markdown("<h2 style='text-align: center; color: white;'>Transaction Data</h2>", unsafe_allow_html=True)
+        for row in records:
+            st.info("Customer Name: "+ str(row[0])+"  \n Bank Account Number: "+ str(row[1])+"  \n Transaction ID: "+ str(row[2])+"  \n Transaction Amount: "+ str(row[3])+"  \n PAN: "+ str(row[4]))
+        # time.sleep(10)
+        # pyautogui.hotkey('f5')
+        
+conn.close()
         
         
         
