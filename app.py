@@ -4,6 +4,7 @@ import joblib
 import time
 import subprocess
 import os
+import numpy as np
 
 from streamlit.elements.arrow import Data
 
@@ -42,11 +43,15 @@ with col6:
 with col7:
     button_start= st.button('Terminal')
 with col8:
-    st.button("Report")
+    button_report= st.button("Report")
     
 
 if button_start:
-    subprocess.call('start', shell = True) 
+    subprocess.call('start', shell = True)
+
+if button_report:
+    subprocess.Popen(["streamlit", "run", "reports.py"])
+     
 
 
     
@@ -55,6 +60,21 @@ if button_start:
 mj=joblib.load('model_joblib_real_random_forest_fourteen')
 df = pd.read_csv('x_test_fourteen.csv')
 k=0
+
+values=['205.174.165.73','205.174.165.69','205.174.165.70','205.174.165.71', 
+'85.237.172.55',
+'157.79.212.141',
+'197.23.92.143',
+'81.87.44.36',
+'228.131.54.49',
+'174.147.164.42',
+'6.16.43.120',
+'111.168.193.137',
+'144.3.229.250',
+'62.174.83.16']
+
+iplist= []
+iplist= np.random.choice(values, size= 101)
 
 # .format(port.to_string(index=False))
 for i in range(1, 102):
@@ -71,21 +91,33 @@ for i in range(1, 102):
         k=k+1
         continue
     elif val == 1:
-        st.error("DDoS attack detected! Decoy Server Activated for IP address 205.174.165.73")
+        st.error("DDoS attack detected! Decoy Server activated for IP Address "+ iplist[i])
     elif val == 2: 
-        st.error("PortScan attack detected! Decoy Server Activated for IP address 205.174.165.73")
+        st.error("PortScan attack detected! Decoy Server activated for IP Address "+ iplist[i])
     elif val == 3:
-        st.error("Bot attack detected! Decoy Server Activated for IP address 205.174.165.73")
+        st.error("Bot attack detected! Decoy Server activated for IP Address "+ iplist[i])
     elif val == 4: 
-        st.error("Infiltration attack detected! Decoy Server Activated for IP address 205.174.165.73")
+        st.error("Infiltration attack detected! Decoy Server activated for IP Address "+ iplist[i])
     elif val == 5: 
-        st.error("Web attack (Brute Force) detected! IP address 205.174.165.73 blocked for next 15 seconds")
+        st.error("Web attack (Brute Force) detected! Decoy Server activated for IP Address "+ iplist[i])
     elif val == 6:
-        st.error("Web attack (XSS) detected! IP address 205.174.165.73 blocked for next 15 seconds ")
+        st.error("Web attack (XSS) detected! Decoy Server activated for IP Address "+ iplist[i])
     elif val == 7:
-        st.error("Web attack (SQL Injection) detected! IP address 205.174.165.73 blocked for next 15 seconds")
+        st.error("Web attack (SQL Injection) detected! Decoy Server activated for IP Address "+ iplist[i])
+    elif val ==8:
+        st.error("FTP-Patator attack detected! Decoy Server activated for IP Address "+ iplist[i])
+    elif val==9:
+        st.error('SSH-Patator attack detected! Decoy Server activated for IP Address' + iplist[i])
+    elif val==10:
+        st.error('DoS slowloris attack detected! Decoy Server activated for IP Address' + iplist[i])
+    elif val ==11:
+        st.error('DoS Slowhttptest attack detected! Decoy Server activated for IP Address' + iplist[i])
+    elif val==12:
+        st.error('DoS Hulk attack detected! Decoy Server activated for IP Address' + iplist[i])
+    elif val==13:
+        st.error('DoS GoldenEye attack detected! Decoy Server activated for IP Address' + iplist[i])
     else:
-        st.error("FTP-Patator attack detected! IP address 205.174.165.69 blocked for next 15 seconds")
+        st.error('Heartbleed attack detected! Decoy Server activated for IP Address' + iplist[i])
 
     
 
