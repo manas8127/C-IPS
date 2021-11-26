@@ -52,12 +52,14 @@
 import streamlit as st
 import pandas as pd
 from datetime import *
-from time import *
+import time
 from streamlit.script_runner import StopException, RerunException
 import subprocess
 import pyautogui
+from PIL import Image
+img=Image.open('cips2.png')
 
-st.set_page_config(page_title='C-IPS Login')
+st.set_page_config(page_title='C-IPS Login', page_icon=img)
 
 
 
@@ -145,7 +147,8 @@ def main():
 		if st.button("Signup"):
 			create_usertable()
 			add_userdata(new_user,make_hashes(new_password))
-			st.success("You have successfully created an account, now refresh the page to LogIn")
+			st.success("You have successfully created an account, this page will automatically refresh in 5 seconds")
+			time.sleep(5)
 			#st.info("Go to Login Menu to login")
 			pyautogui.hotkey('f5')
 			
