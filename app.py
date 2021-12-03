@@ -90,7 +90,7 @@ def export():
             #grid.set_axis_labels('Benign', 'DDoS')
             #grid.ax_joint.set_xticks([0 , 1 , 2 ])
 
-            plt.scatter(x=dfyi['Label'], y=dfxi[a], color='green', marker=10)
+            plt.scatter(x=dfyi['Label'], y=dfxi[a], s=500,c='blue')
             plt.title('Attacks vs ' + str(a), fontsize=11)
             plt.xlabel('Attacks', fontsize=11)
             plt.ylabel(a, fontsize=11)
@@ -136,17 +136,7 @@ if button_report:
 
 
 
-values=['205.174.165.73','205.174.165.69','205.174.165.70','205.174.165.71', 
-'85.237.172.55',
-'157.79.212.141',
-'197.23.92.143',
-'81.87.44.36',
-'228.131.54.49',
-'174.147.164.42',
-'6.16.43.120',
-'111.168.193.137',
-'144.3.229.250',
-'62.174.83.16']
+values=['205.174.165.73','205.174.165.69','205.174.165.70','205.174.165.71']
 
 
 
