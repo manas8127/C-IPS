@@ -64,9 +64,9 @@ with col4:
 
 
 conn = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="8127199067@1",
+  host="",
+  user="",
+  password="",
   database="cips"
 )
 
