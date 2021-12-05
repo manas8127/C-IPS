@@ -28,18 +28,44 @@ hide_st_style = """
             header {visibility: hidden;}
             </style>
             """
-#st.markdown(hide_st_style, unsafe_allow_html=True)
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; color: white;'>C-IPS</h1>", unsafe_allow_html=True)
 #st.write()
+
+col1, col2, col3 , col4, col5, col6, col7, col8 = st.columns(8)
+
+with col1:
+    pass
+with col2:
+    pass
+with col3 :
+    pass
+with col4:
+    pass
+with col5:
+    pass
+with col6:
+    pass
+with col7:
+    button_start= st.button('Terminal')
+with col8:
+    button_report= st.button("Report")
+    
+
+if button_start:
+    subprocess.call('start', shell = True)
+
+
+     
 
 # st.write("\n")
 mj=joblib.load('model_joblib_real_random_forest_fourteen')
 df = pd.read_csv('x_test_fourteen.csv')
 
-dfxi=df.iloc[0:100]
+dfxi=df.iloc[0:500]
 dfy = pd.read_csv(r'y_test_fourteen.csv')
-dfyi=dfy.iloc[0:100]
+dfyi=dfy.iloc[0:500]
 
 date1 = '2017-07-03'
 date2 = '2017-07-07'
@@ -64,7 +90,7 @@ def export():
        'DoS slowloris', 'DoS Slowhttptest', 'DoS Hulk', 'DoS GoldenEye',
        'Heartbleed']
     tickvals = [0 , 1 , 2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10 ,11 ,12 ,13 , 14]
-    with PdfPages(r'E:\Charts.pdf') as export_pdf:
+    with PdfPages(r'Charts.pdf') as export_pdf:
         fig2=plt.figure(figsize=(19.69,19.27))
 
         ax=sns.countplot(x=dfyi["Label"], hue = dfxi["Time"])
@@ -103,37 +129,38 @@ def export():
             plt.close()
 
 
-col1, col2, col3 , col4, col5, col6, col7, col8 = st.columns(8)
+# col1, col2, col3 , col4, col5, col6, col7, col8 = st.columns(8)
 
-with col1:
-    pass
-with col2:
-    pass
-with col3 :
-    pass
-with col4:
-    pass
-with col5:
-    pass
-with col6:
-    pass
-with col7:
-    button_start= st.button('Terminal')
-with col8:
-    button_report= st.button("Report")
+# with col1:
+#     pass
+# with col2:
+#     pass
+# with col3 :
+#     pass
+# with col4:
+#     pass
+# with col5:
+#     pass
+# with col6:
+#     pass
+# with col7:
+#     button_start= st.button('Terminal')
+# with col8:
+#     button_report= st.button("Report")
     
 
-if button_start:
-    subprocess.call('start', shell = True)
+# if button_start:
+#     subprocess.call('start', shell = True)
 
-if button_report:
-    export()
+# if button_report:
+#     export()
      
 
 
     
 
-
+if button_report:
+    export()
 
 
 values=['205.174.165.73','205.174.165.69','205.174.165.70','205.174.165.71']

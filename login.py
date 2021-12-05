@@ -61,6 +61,15 @@ img=Image.open('cips2.png')
 
 st.set_page_config(page_title='C-IPS Login', page_icon=img)
 
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 
 
 # Security
@@ -142,27 +151,20 @@ def main():
 	elif choice == "SignUp":
 		new_user = st.text_input("Username")
 		new_password = st.text_input("Password",type='password')
-		st.info("Make changes to server whose ownership does not belong to you constitutes to un-ethical hacking and can lead to improsonment under IT Act.")
+		st.info("Make changes to server whose ownership does not belong to you constitutes to un-ethical hacking and can lead to imprisonment under IT Act.")
 		st.checkbox("I accept the terms and conditions")
 		if st.button("Signup"):
 			create_usertable()
 			add_userdata(new_user,make_hashes(new_password))
-			st.success("You have successfully created an account, this page will automatically refresh in 5 seconds")
-			time.sleep(5)
+			st.success("You have successfully created an account, this page will automatically refresh")
+			time.sleep(1)
 			#st.info("Go to Login Menu to login")
 			pyautogui.hotkey('f5')
 			
 
 
 
-	hide_st_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            </style>
-            """
-	st.markdown(hide_st_style, unsafe_allow_html=True)
+	
 
 
 if __name__ == '__main__':
