@@ -60,7 +60,7 @@ with col4:
 
 
 
-
+#Add your db details here
 
 
 conn = mysql.connector.connect(
